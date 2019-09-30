@@ -1,0 +1,9 @@
+<?
+
+/**
+ * Change max_length of occurrence map caption
+ */
+function alkcarb_update_7001()
+{
+  alkcarb_change_text_field_max_length('field_map_caption', 1000);
+}
