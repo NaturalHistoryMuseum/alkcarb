@@ -3,7 +3,7 @@
 /**
  * Helper function to change the max length of a text field.
  */
-function MYMODULE_change_text_field_max_length($field_name, $new_length)
+function alkcarb_change_text_field_max_length($field_name, $new_length)
 {
   $field_table = 'field_data_' . $field_name;
   $field_revision_table = 'field_revision_' . $field_name;
