@@ -1,4 +1,5 @@
 <?
+define('ALKCARB_TWITTER_FEED', 'alkcarb_twitter_feed');
 
 /**
  * Helper function to change the max length of a text field.
@@ -22,4 +23,32 @@ function alkcarb_change_text_field_max_length($field_name, $new_length)
     ->fields(array('data' => $config))
     ->condition('field_name', $field_name)
     ->execute();
+}
+
+$subject = 'Latest tweets from @alkcarb';
+
+function alkcarb_block_info(){
+  return [
+    ALKCARB_TWITTER_FEED => [
+      'info' => $subject
+    ]
+    ];
+}
+
+function alkcarb_block_view($delta){
+  if($delta == ALKCARB_TWITTER_FEED) {
+    return [
+      'subject' => t($subject),
+      'content' => [
+        '#markup' => '<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/alkcarb?ref_src=twsrc%5Etfw">Tweets by alkcarb</a>',
+        '#attached' => [
+          'js' => [
+            'https://platform.twitter.com/widgets.js' => [
+              'type' => 'external'
+            ]
+          ]
+        ]
+      ]
+    ];
+  }
 }
