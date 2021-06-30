@@ -1,5 +1,6 @@
 <?
 define('ALKCARB_TWITTER_FEED', 'alkcarb_twitter_feed');
+define('ALKCARB_TWITTER_FEED_SUBJECT', t('Latest tweets from @alkcarb'));
 
 /**
  * Helper function to change the max length of a text field.
@@ -25,20 +26,19 @@ function alkcarb_change_text_field_max_length($field_name, $new_length)
     ->execute();
 }
 
-$subject = 'Latest tweets from @alkcarb';
-
 function alkcarb_block_info(){
   return [
     ALKCARB_TWITTER_FEED => [
-      'info' => $subject
+      'info' => ALKCARB_TWITTER_FEED_SUBJECT
     ]
-    ];
+  ];
 }
 
 function alkcarb_block_view($delta){
+  global $subject;
   if($delta == ALKCARB_TWITTER_FEED) {
     return [
-      'subject' => t($subject),
+      'subject' => ALKCARB_TWITTER_FEED_SUBJECT,
       'content' => [
         '#markup' => '<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/alkcarb?ref_src=twsrc%5Etfw">Tweets by alkcarb</a>',
         '#attached' => [
