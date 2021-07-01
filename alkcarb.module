@@ -26,6 +26,9 @@ function alkcarb_change_text_field_max_length($field_name, $new_length)
     ->execute();
 }
 
+/**
+ * Implements hook_block_info
+ */
 function alkcarb_block_info(){
   return [
     ALKCARB_TWITTER_FEED => [
@@ -34,6 +37,9 @@ function alkcarb_block_info(){
   ];
 }
 
+/**
+ * Implements hook_block_view
+ */
 function alkcarb_block_view($delta){
   global $subject;
   if($delta == ALKCARB_TWITTER_FEED) {
@@ -51,4 +57,13 @@ function alkcarb_block_view($delta){
       ]
     ];
   }
+}
+
+/**
+ * Implements hook_scratchpads_front_blocks
+ */
+function alkcarb_scratchpads_front_blocks(){
+  return [
+    'alkcarb' => ALKCARB_TWITTER_FEED
+  ];
 }
