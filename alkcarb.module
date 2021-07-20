@@ -3,6 +3,19 @@ define('ALKCARB_TWITTER_FEED', 'alkcarb_twitter_feed');
 define('ALKCARB_TWITTER_FEED_SUBJECT', t('Latest tweets from @alkcarb'));
 
 /**
+ * Implements hook_view_pre_view
+ * Add twitter widget to alkcarb front page
+ */
+function alkcarb_views_pre_view(&$view) {
+  switch($view->name){
+    case 'front_page_blocks':
+    case 'front_page_slideshow':
+
+    drupal_add_js('https://platform.twitter.com/widgets.js', 'external');
+  }
+}
+
+/**
  * Helper function to change the max length of a text field.
  */
 function alkcarb_change_text_field_max_length($field_name, $new_length)
@@ -47,13 +60,6 @@ function alkcarb_block_view($delta){
       'subject' => ALKCARB_TWITTER_FEED_SUBJECT,
       'content' => [
         '#markup' => '<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/alkcarb?ref_src=twsrc%5Etfw">Tweets by alkcarb</a>',
-        '#attached' => [
-          'js' => [
-            'https://platform.twitter.com/widgets.js' => [
-              'type' => 'external'
-            ]
-          ]
-        ]
       ]
     ];
   }
